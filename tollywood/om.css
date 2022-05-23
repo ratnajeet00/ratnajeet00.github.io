@@ -1,0 +1,137 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+
+}
+body 
+{
+    
+     position:relative;
+    background-position:center ;
+    background-size:cover;
+    color: #fff;
+}
+.logo
+{
+    width: 100px;
+    margin-top: 18;
+    height: 100px;
+    background-color: transparent;
+}
+.header
+{
+    height: 10%;
+    height: 10px;
+}
+.header-btn
+{
+    text-decoration: none !important;
+    border-radius:30px;
+    padding: 5px 10px;
+    float: right;
+    margin-top: 20px;
+    margin-right:10;
+    color: #fff !important;
+    background: #0366f9;
+    font-weight:100px;
+    margin-left: 300px;  
+    margin-left: 100px; 
+    transition: 1s;
+
+    
+}
+.header-btn:hover
+{
+    transform: scale(-1.1);
+}
+.movie-details
+{
+    margin: 3% 0;
+    margin-right: 100px;
+}
+.left-box
+{
+    color: #fff;
+    margin: 15px;
+    padding: 20px;
+
+}
+.casting img
+{
+    height: 90px;
+    width: 90px;
+    margin-right: 10px;
+}
+.left-box a
+{
+    text-decoration: none;
+    border-radius:30px;
+    padding: 7px 10px;
+    margin-top: 35px;
+    color: #fff;
+    background: #0366f9;
+    font-weight:600px;
+    display: inline-block;
+    margin-right: 10px;
+
+}
+.download-btn
+{
+    border: 1px solid #fff !important;
+    background: transparent !important;
+}
+.fa
+{
+    margin: 0 5px;
+}
+.movie-img
+{
+
+    position: absolute;
+    margin-top: -380px;
+    margin-left: 500px;
+    height: 350px;
+    box-shadow: -4px 4px  5px 0 #000;
+
+}
+.series h3
+{
+color:#fff;
+}
+.series img
+{
+    width: 400px;
+    margin-top: 30px;
+    box-shadow:-8px 8px 10px 0 #000;
+    cursor: pointer;
+    transition: 1s;
+    padding-left: 10px;
+    float: left;
+    height: 300px;
+}
+.series img:hover
+{
+transform: translateY(-10px);
+}
+.col-md-6
+{
+    width: 30%;
+    float:right;
+    padding-left: 2000px;
+    margin: top 500px;;
+    margin-bottom: 100px;
+}
+.WatchNow 
+{
+    border: 1px solid #fff !important;
+    background: transparent !important;
+}
+.o.jfif
+{
+    background: transparents;
+    border-radius: 0%;
+   
+
+
+}
