@@ -9,8 +9,8 @@
       name="description"
       content="Ratnajeet Patil - Software Engineer specializing in web development, mobile apps, and IoT solutions. Experienced in React Native, Flask, Arduino, and full-stack development with proven track record in inventory management and automation systems."
     />
-    <meta name="theme-color" content="#121212" />
-    <meta name="background-color" content="#121212" />
+    <meta name="theme-color" content="#121216" />
+    <meta name="background-color" content="#121216" />
     <meta name="display" content="standalone" />
     <meta
       name="keywords"
@@ -51,22 +51,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Google Fonts — Inter + Fragment Mono -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Inter:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
-      rel="stylesheet"
-    />
     
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Set initial theme before paint to avoid flash -->
+    <script>
+      (function () {
+        var t = localStorage.getItem('theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
   </head>
-  <body class="dark-mode">
-    <header>
+  <body>
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+      <div class="loader-text">Ratnajeet Patil</div>
+      <div class="loader-line"></div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <nav class="mobile-menu-overlay" id="mobile-menu">
+      <ul>
+        <li><a href="#home" class="mobile-nav-link">Home</a></li>
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
+        <li><a href="#research" class="mobile-nav-link">Research</a></li>
+        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+        <li><a href="#education" class="mobile-nav-link">Education</a></li>
+        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+      </ul>
+    </nav>
+
+    <header id="site-header">
       <nav id="navbar">
         <div class="container">
           <h1 id="logo"><a href="index.html">Ratnajeet Patil</a></h1>
@@ -78,15 +107,16 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#projects">Projects</a></li>
-           
           </ul>
-          <div class="theme-switch">
-            <i class="fas fa-moon"></i>
-          </div>
-          <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+          <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" data-hover>
+              <i class="fas fa-sun"></i>
+            </button>
+            <div class="hamburger" id="hamburger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
           </div>
         </div>
       </nav>
@@ -97,14 +127,15 @@
       <section id="home" class="hero">
         <div class="container">
           <div class="hero-content">
-            <h1>Hello, I'm <span class="highlight">Ratnajeet</span></h1>
             <h2>Software Engineer</h2>
+            <h1 id="hero-heading">Ratnajeet Patil</h1>
             <p>
-              Passionate about creating innovative solutions through technology
-              and coding.
+              Crafting innovative solutions through code — 
+              web, mobile, and IoT.
             </p>
             <div class="cta-buttons">
-              <a href="#projects" class="btn secondary-btn">View My Work</a>
+              <a href="#projects" class="btn primary-btn">View Work</a>
+              <a href="ratnajeet's Resume.pdf" class="btn secondary-btn" download>Resume</a>
             </div>
             <div class="social-icons">
               <a
@@ -112,35 +143,40 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                ><i class="fab fa-linkedin"></i
-              ></a>
+                data-hover
+              ><i class="fab fa-linkedin"></i></a>
               <a
                 href="https://github.com/ratnajeet00"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                ><i class="fab fa-github"></i
-              ></a>
+                data-hover
+              ><i class="fab fa-github"></i></a>
               <a
                 href="mailto:ratnajeetpatil64@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Email"
-                ><i class="fas fa-envelope"></i
-              ></a>
+                data-hover
+              ><i class="fas fa-envelope"></i></a>
             </div>
           </div>
+        </div>
+        <div class="scroll-indicator">
+          <span>Scroll</span>
+          <div class="arrow"></div>
         </div>
       </section>
 
       <!-- About Section -->
       <section id="about" class="about">
         <div class="container">
-          <div class="section-header">
+          <span class="section-label reveal-element">— 01 About</span>
+          <div class="section-header reveal-element delay-1">
             <h2>About Me</h2>
           </div>
           <div class="about-content">
-            <div class="about-image">
+            <div class="about-image reveal-element delay-2">
               <img
                 src="img/profile-photo.jpeg"
                 alt="Ratnajeet Patil - Software Engineer and Full Stack Developer Profile Photo"
@@ -149,32 +185,32 @@
               />
             </div>
             <div class="about-text">
-              <p>
+              <p class="reveal-element delay-2">
                 I am a dedicated Software Engineer with experience in developing
                 and implementing software solutions. My expertise spans across
                 multiple programming languages and frameworks, with a focus on
                 creating efficient, scalable applications.
               </p>
-              <p>
+              <p class="reveal-element delay-3">
                 I'm passionate about solving complex problems and continuously
                 expanding my technical knowledge to stay at the forefront of
                 industry developments.
               </p>
-              <div class="about-details">
+              <div class="about-details reveal-element delay-3">
                 <div class="detail-item">
-                  <span class="detail-label">Name:</span>
+                  <span class="detail-label">Name</span>
                   <span class="detail-info">Ratnajeet</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Email:</span>
+                  <span class="detail-label">Email</span>
                   <span class="detail-info">ratnajeetpatil64@gmail.com</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Location:</span>
+                  <span class="detail-label">Location</span>
                   <span class="detail-info">Pune, Maharashtra</span>
                 </div>
               </div>
-              <a href="ratnajeet's Resume.pdf" class="btn primary-btn" download
+              <a href="ratnajeet's Resume.pdf" class="btn primary-btn reveal-element delay-4" download data-hover
                 >Download Resume</a
               >
             </div>
@@ -185,11 +221,12 @@
       <!-- Experience Section -->
       <section id="experience" class="experience">
         <div class="container">
-          <div class="section-header">
+          <span class="section-label reveal-element">— 02 Experience</span>
+          <div class="section-header reveal-element delay-1">
             <h2>Work Experience</h2>
           </div>
           <div class="timeline">
-            <div class="timeline-item">
+            <div class="timeline-item reveal-element delay-2">
               <div class="timeline-content">
                 <h3>Software Development Intern</h3>
                 <h4>Sujalam Chemicals</h4>
@@ -217,11 +254,12 @@
       <!-- Research & Leadership Section -->
       <section id="research" class="education">
         <div class="container">
-          <div class="section-header">
+          <span class="section-label reveal-element">— 03 Research</span>
+          <div class="section-header reveal-element delay-1">
             <h2>Research & Leadership</h2>
           </div>
           <div class="education-content">
-            <div class="education-item">
+            <div class="education-item reveal-element delay-2">
               <h3>DIQA - No-Reference Image Quality Assessment Library</h3>
               <p class="education-date">Research Project | Computer Vision & AI</p>
               <ul class="responsibilities">
@@ -229,12 +267,12 @@
                 <li>Built an XGBoost-based routing system to select the most accurate IQA model dynamically and created DIQATrainer to adapt models on custom data.</li>
               </ul>
             </div>
-            <div class="education-item">
+            <div class="education-item reveal-element delay-3">
               <h3>Research Contributor</h3>
               <h4>RFID Attendance System Paper</h4>
               <p class="education-date">January 2024 - March 2024 | Pune, India</p>
               <ul class="responsibilities">
-                <li>authored and published research paper on RFID-based attendance management systems</li>
+                <li>Authored and published research paper on RFID-based attendance management systems</li>
                 <li>Presented technical findings at regional tech conference with 100+ industry professionals</li>
               </ul>
             </div>
@@ -245,144 +283,70 @@
       <!-- Skills Section -->
       <section id="skills" class="skills">
         <div class="container">
-          <div class="section-header">
+          <span class="section-label reveal-element">— 04 Skills</span>
+          <div class="section-header reveal-element delay-1">
             <h2>Technical Skills</h2>
           </div>
           <div class="skills-content">
-            <div class="skill-category">
+            <div class="skill-category reveal-element delay-2">
               <h3>Programming Languages</h3>
-              <div class="skill-items">
-                <div class="skill-item">
-                  <div class="skill-name">JavaScript</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 90%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">Python</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 85%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">Java</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 88%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">TypeScript</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 82%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">C++</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 75%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">C</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 70%"></div>
-                  </div>
-                </div>
+              <div class="skill-items stagger-children" data-stagger>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>JavaScript</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>Python</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>Java</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>TypeScript</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>C++</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>C</div></div>
               </div>
             </div>
 
-            <div class="skill-category">
+            <div class="skill-category reveal-element delay-2">
               <h3>Frameworks & Libraries</h3>
-              <div class="skill-items">
-                <div class="skill-item">
-                  <div class="skill-name">React.js</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 88%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">React Native</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 85%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">Node.js</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 80%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">Flask</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 78%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">Arduino</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 92%"></div>
-                  </div>
-                </div>
+              <div class="skill-items stagger-children" data-stagger>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>React.js</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>React Native</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>Node.js</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>Flask</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>Arduino</div></div>
               </div>
             </div>
 
-            <div class="skill-category">
+            <div class="skill-category reveal-element delay-2">
               <h3>Databases</h3>
-              <div class="skill-items">
-                <div class="skill-item">
-                  <div class="skill-name">SQL</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 85%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">MySQL</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 82%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">MongoDB</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 75%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-name">SQLite</div>
-                  <div class="skill-bar">
-                    <div class="skill-level" style="width: 80%"></div>
-                  </div>
-                </div>
+              <div class="skill-items stagger-children" data-stagger>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>SQL</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>MySQL</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>MongoDB</div></div>
+                <div class="skill-item stagger-item"><div class="skill-name" data-hover>SQLite</div></div>
               </div>
             </div>
 
-            <div class="skill-category">
+            <div class="skill-category reveal-element delay-2">
               <h3>Tools & Certifications</h3>
-              <div class="skill-tags">
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">GitHub</span>
-                <span class="skill-tag">VS Code</span>
-                <span class="skill-tag">Linux</span>
-                <span class="skill-tag">Java Certification</span>
-                <span class="skill-tag">JavaScript Certification</span>
-                <span class="skill-tag">CSS Certification</span>
-                <span class="skill-tag">SQL Certification</span>
-                <span class="skill-tag">Node.js Certification</span>
-                <span class="skill-tag">Python & ML (Kaggle)</span>
-                <span class="skill-tag">Cybersecurity (LinkedIn)</span>
+              <div class="skill-tags stagger-children" data-stagger>
+                <span class="skill-tag stagger-item" data-hover>Git</span>
+                <span class="skill-tag stagger-item" data-hover>GitHub</span>
+                <span class="skill-tag stagger-item" data-hover>VS Code</span>
+                <span class="skill-tag stagger-item" data-hover>Linux</span>
+                <span class="skill-tag stagger-item" data-hover>Java Certification</span>
+                <span class="skill-tag stagger-item" data-hover>JavaScript Certification</span>
+                <span class="skill-tag stagger-item" data-hover>CSS Certification</span>
+                <span class="skill-tag stagger-item" data-hover>SQL Certification</span>
+                <span class="skill-tag stagger-item" data-hover>Node.js Certification</span>
+                <span class="skill-tag stagger-item" data-hover>Python & ML (Kaggle)</span>
+                <span class="skill-tag stagger-item" data-hover>Cybersecurity (LinkedIn)</span>
               </div>
             </div>
 
-            <div class="skill-category">
+            <div class="skill-category reveal-element delay-2">
               <h3>Interests</h3>
-              <div class="skill-tags">
-                <span class="skill-tag">Home Automation</span>
-                <span class="skill-tag">Robotics</span>
-                <span class="skill-tag">Mobile UI/UX Design</span>
-                <span class="skill-tag">Animation Rendering</span>
-                <span class="skill-tag">Open-source Contributions</span>
-                <span class="skill-tag">AI & ML</span>
+              <div class="skill-tags stagger-children" data-stagger>
+                <span class="skill-tag stagger-item" data-hover>Home Automation</span>
+                <span class="skill-tag stagger-item" data-hover>Robotics</span>
+                <span class="skill-tag stagger-item" data-hover>Mobile UI/UX Design</span>
+                <span class="skill-tag stagger-item" data-hover>Animation Rendering</span>
+                <span class="skill-tag stagger-item" data-hover>Open-source Contributions</span>
+                <span class="skill-tag stagger-item" data-hover>AI & ML</span>
               </div>
             </div>
           </div>
@@ -392,21 +356,20 @@
       <!-- Education Section -->
       <section id="education" class="education">
         <div class="container">
-          <div class="section-header">
+          <span class="section-label reveal-element">— 05 Education</span>
+          <div class="section-header reveal-element delay-1">
             <h2>Education</h2>
           </div>
           <div class="education-content">
-            <div class="education-item">
+            <div class="education-item reveal-element delay-2">
               <h3>Bachelor of Technology in Computer Science Engineering</h3>
               <h4>DES Pune University</h4>
-              <p class="education-date"> June 2027 </p>
+              <p class="education-date">June 2027</p>
             </div>
-            <div class="education-content">
-              <div class="education-item">
-                <h3>Diploma in Computer Technology</h3>
-                <h4>Sou Venutai Chavan Polytechnic</h4>
-                <p class="education-date"> June 2024 </p>
-              </div>
+            <div class="education-item reveal-element delay-3">
+              <h3>Diploma in Computer Technology</h3>
+              <h4>Sou Venutai Chavan Polytechnic</h4>
+              <p class="education-date">June 2024</p>
             </div>
           </div>
         </div>
@@ -415,23 +378,23 @@
       <!-- Projects Section -->
       <section id="projects" class="projects">
         <div class="container">
-          <div class="section-header">
+          <span class="section-label reveal-element">— 06 Projects</span>
+          <div class="section-header reveal-element delay-1">
             <h2>Projects</h2>
           </div>
-          <div class="project-filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="web">Web Apps</button>
-            <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
-            <button class="filter-btn" data-filter="iot">IoT</button>
+          <div class="project-filters reveal-element delay-2">
+            <button class="filter-btn active" data-filter="all" data-hover>All</button>
+            <button class="filter-btn" data-filter="web" data-hover>Web Apps</button>
+            <button class="filter-btn" data-filter="mobile" data-hover>Mobile Apps</button>
+            <button class="filter-btn" data-filter="iot" data-hover>IoT</button>
           </div>
           <div class="projects-grid">
-            <div class="project-item" data-category="web">
+            <div class="project-item reveal-element" data-category="web">
               <div class="project-info">
                 <h3>DIQA - No-Reference Image Quality Assessment Library</h3>
-                <p>Developed a Python-based library for NR-IQA with a unified API to predict image quality (MOS scores) across multiple datasets.</p>
-                <p>Built an XGBoost-based routing system to select the most accurate IQA model dynamically and created DIQATrainer to adapt models on custom data.</p>
+                <p>Developed a Python-based library for NR-IQA with a unified API to predict image quality (MOS scores) across multiple datasets. Built an XGBoost-based routing system to select the most accurate IQA model dynamically.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://github.com/ratnajeet00" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>Python</span>
@@ -442,12 +405,13 @@
               </div>
             </div>
 
-            <div class="project-item" data-category="web">
+            <div class="project-item reveal-element" data-category="web">
               <div class="project-info">
-                <h3>AutoManim</h3>
-                <p>Flask web application that generates Manim animations from natural language using Groq API. Reduced animation creation time by 90% for mathematical education videos.</p>
+                <h3>Open Anim</h3>
+                <p>Web application that generates Manim animations from natural language using an AI API. Reduced animation creation time by 90% for mathematical education videos.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00/automanim" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://openanim.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                  <a href="https://github.com/ratnajeet00/automanim" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>Flask</span>
@@ -457,12 +421,12 @@
               </div>
             </div>
 
-            <div class="project-item" data-category="mobile">
+            <div class="project-item reveal-element" data-category="mobile">
               <div class="project-info">
                 <h3>Visitor Entry & Approval System</h3>
                 <p>Android application for secure visitor registration with Room database backend. Implemented real-time notifications and approval workflows, improving entry processing speed by 60%.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00/visitor-approval" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://github.com/ratnajeet00/visitor-approval" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>Android</span>
@@ -472,12 +436,12 @@
               </div>
             </div>
 
-            <div class="project-item" data-category="iot">
+            <div class="project-item reveal-element" data-category="iot">
               <div class="project-info">
                 <h3>Smart Attendance System</h3>
                 <p>Arduino-based RFID attendance system with ESP8266 connectivity and LCD display. Achieved 95% accuracy in RFID scanning and eliminated manual attendance logging.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00/smart-attendance" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://github.com/ratnajeet00/smart-attendance" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>Arduino</span>
@@ -487,12 +451,12 @@
               </div>
             </div>
 
-            <div class="project-item" data-category="mobile">
+            <div class="project-item reveal-element" data-category="mobile">
               <div class="project-info">
                 <h3>Inventory & Order Management App</h3>
                 <p>React Native application to manage chemical inventory and streamline order flow. Increased order fulfilment efficiency by 65% through dynamic UI and optimized data handling.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00/inventory-management" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://github.com/ratnajeet00/inventory-management" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>React Native</span>
@@ -502,12 +466,12 @@
               </div>
             </div>
             
-            <div class="project-item" data-category="web">
+            <div class="project-item reveal-element" data-category="web">
               <div class="project-info">
                 <h3>Attendance Dashboard UI</h3>
                 <p>Responsive interface using Tailwind CSS, JavaScript, and HTML for parent-teacher attendance tracking. Enhanced accessibility by providing real-time student attendance updates.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00/attendance-dashboard" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://github.com/ratnajeet00/attendance-dashboard" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>Tailwind CSS</span>
@@ -517,12 +481,12 @@
               </div>
             </div>
             
-            <div class="project-item" data-category="iot">
+            <div class="project-item reveal-element" data-category="iot">
               <div class="project-info">
                 <h3>IoT-based Smart Light Switch</h3>
                 <p>Integrated Alexa-controlled smart switch using Arduino IoT Cloud. Enabled voice-activated home automation, reducing manual switch usage by 85%.</p>
                 <div class="project-links">
-                  <a href="https://github.com/ratnajeet00/smart-light" target="_blank" rel="noopener noreferrer" class="btn secondary-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                  <a href="https://github.com/ratnajeet00/smart-light" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" data-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
                 <div class="project-tags">
                   <span>Arduino IoT</span>
@@ -535,19 +499,34 @@
         </div>
       </section>
 
+      <!-- Marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-inner">
+          <span>Software Engineer</span>
+          <span>Full Stack Developer</span>
+          <span>IoT Enthusiast</span>
+          <span>Problem Solver</span>
+          <span>Software Engineer</span>
+          <span>Full Stack Developer</span>
+          <span>IoT Enthusiast</span>
+          <span>Problem Solver</span>
+        </div>
+      </div>
+
     </main>
 
     <footer>
       <div class="container">
-        <p>
-          &copy; <span id="current-year"></span> Ratnajeet Patil. All Rights Reserved.
-        </p>
         <div class="footer-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="sitemap.xml">Sitemap</a>
+          <a href="#home" data-hover>Home</a>
+          <a href="#about" data-hover>About</a>
+          <a href="#projects" data-hover>Projects</a>
+          <a href="https://github.com/ratnajeet00" target="_blank" rel="noopener noreferrer" data-hover>GitHub</a>
+          <a href="https://www.linkedin.com/in/ratnajeet-patil-770b4a24a/" target="_blank" rel="noopener noreferrer" data-hover>LinkedIn</a>
         </div>
+        <p>
+          &copy; <span id="current-year"></span> Ratnajeet Patil — Built with precision.
+        </p>
       </div>
     </footer>
 
@@ -643,10 +622,11 @@
           },
           {
             "@type": "SoftwareSourceCode",
-            "name": "AutoManim",
-            "description": "CLI-based AI tool to generate and render Manim animations from natural language prompts",
+            "name": "Open Anim",
+            "description": "Web-based AI tool to generate and render Manim animations from natural language prompts",
             "programmingLanguage": "Python",
             "codeRepository": "https://github.com/ratnajeet00/automanim",
+            "url": "https://openanim.vercel.app/",
             "position": 3
           },
           {
@@ -669,8 +649,12 @@
       }
     </script>
 
+    <!-- GSAP + ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Main JS -->
     <script src="js/main.js"></script>
 
-  
   </body>
 </html>
