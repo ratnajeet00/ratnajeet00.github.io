@@ -308,14 +308,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (heroH2) {
                 heroTimeline.fromTo(heroH2,
                     { opacity: 0, y: 10 },
-                    { opacity: 0.35, y: 0, duration: 0.5 },
+                    { opacity: 0.45, y: 0, duration: 0.5 },
                     0
                 );
             }
             if (heroP) {
                 heroTimeline.fromTo(heroP,
                     { opacity: 0, y: 10 },
-                    { opacity: 0.3, y: 0, duration: 0.5 },
+                    { opacity: 0.5, y: 0, duration: 0.5 },
                     0.1
                 );
             }
